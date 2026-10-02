@@ -1,0 +1,41 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Todo List</title>
+  </head>
+  <body>
+    <h1>My Todo List</h1>
+    <input type="text" id="newItem" />
+    <button type="button" id="addBtn">Add Item</button>
+    <ul id="todoList">
+      
+    </ul>
+
+    <script>
+      const input = document.getElementById('newItem')
+      const list = document.getElementById('todoList')
+      const addBtn = document.getElementById('addBtn')
+
+      function addItem() {
+        const text = input.value.trim()
+        if (text === '') return
+
+        const item = document.createElement('li')
+        item.textContent = text
+        list.appendChild(item)
+        input.value = ''
+        input.focus()
+      }
+
+      addBtn.addEventListener('click', addItem)
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') addItem()
+      })
+    </script>
+  </body>
+</html>
+
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Todo List</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <h1>My Todo List</h1>
+      <input v-model="newItem" @keyup.enter="addItem" />
+      <button type="button" @click="addItem">Add Item</button>
+      <ul>
+        <li v-for="(item, index) in todoList" :key="index">{{ item }}</li>
+      </ul>
+    </div>
+
+    <script>
+      const { createApp } = Vue
+      const myApp1 = Vue.createApp({
+        data() {
+          return {
+            newItem: '',
+            todoList: [],
+          }
+        },
+        methods: {
+          addItem() {
+            const text = this.newItem.trim()
+            if (text === '') return
+            this.todoList.push(text)
+            this.newItem = ''
+          },
+        },
+      })
+      myApp1.mount('#app1')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      body {
+        background: #fff;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app1">
+      <h1>This is a message from app1: {{message}}</h1>
+      <p>This is my ID: {{ ID }}</p>
+      <input v-model="message" />
+      <p>Hello again !!! {{ displayHello() }}</p>
+    </div>
+
+    <script>
+      const { createApp } = Vue
+      const myApp1 = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello Welcome Vue3 !!!',
+            ID: 123456,
+            greeting: 'Welcome Back',
+          }
+        },
+        methods: {
+          displayHello() {
+            return this.greeting
+          },
+        },
+      })
+      myApp1.mount('#app1')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Store</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+    <div id="petstore">
+        <div v-if="!checkedOut">
+            <img :src="product.image" :alt="product.title" width="240">
+            <h1>{{ message }}</h1>
+            <h2 v-text="product.id"></h2>
+
+            <p v-text="product.title"></p>
+            <p v-text="product.description"></p>
+            <p>Price: {{ product.price }}</p>
+            <p>{{ cart.length }} item in the cart</p>
+
+            <button @click="addItem" :disabled="cart.length >= product.availableinventory">Add to Cart</button>
+            <button v-if="cart.length > 0" @click="checkout" style="display: inline-flex; align-items: center; gap: 6px;">
+                <img src="Images/check.png" alt="" width="15" height="15">
+                checkout ({{ cart.length }})
+            </button>
+        </div>
+
+        <div v-else>
+            <h1>Thanks for your purchase</h1>
+            <button @click="returnToStore">return to store</button>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        const myApp = Vue.createApp({
+            data() {
+                return {
+                    message: 'Welcome to my pet store!!!',
+                    product: {
+                        id: 1,
+                        title: 'Best cat food for your cat',
+                        description: 'very nice',
+                        price: 2000,
+                        image: 'Images/tom.png_files/product-fullsize.png',
+                        availableinventory: 5
+                    },
+                    cart: [],
+                    checkedOut: false
+
+    
+                }
+            },
+            methods: {
+                addItem() {
+                    if (this.cart.length >= this.product.availableinventory) return
+                    this.cart.push(this.product.id)
+                },
+                checkout() {
+                    this.checkedOut = true
+                    this.cart = []
+                },
+                returnToStore() {
+                    this.checkedOut = false
+                }
+
+               
+
+            }
+        })
+        myApp.mount('#petstore')
+    </script>
+</body>
+</html>
